@@ -31,16 +31,19 @@ list_colors = ['black', 'red', 'green', 'blue', 'yellow']
 def plot_bar(some_date):
     df2 = df[df['Date'].eq(some_date)]
     ax.clear()
-    # Only take Confirmed column in descending order
+   
+# Only take Confirmed column in descending order
     df3 = df2.sort_values(by = 'Confirmed', ascending = False)
-    # Select the top 5 Confirmed countries
+    
+# Select the top 5 Confirmed countries from above list 
     df4 = df3[df3['Country'].isin(list_countries)]
-    # print(df4)  # Uncomment to see that dat is only for 5 countries
-    sleep(0.2)  # To slow down the animation
-    # ax.barh() makes a horizontal bar plot.
+    
+    print(df4)  # Uncomment to see that dat is only for 5 countries
+    sleep(3)  # To slow down the animation
+    # using the ax.barh() makes a horizontal bar plot.
     return ax.barh(df4['Country'], df4['Confirmed'], color= list_colors)
 
-###----Step 5:- Create FuncAnimation object---------
+
 my_anim = animation.FuncAnimation(fig = fig, func = plot_bar,
                     frames= list_dates, blit=True,
                     interval=20)
